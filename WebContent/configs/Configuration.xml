@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configuration>
+  <workspaces>
+    <workspace>
+      <name>9.2 KT</name>
+      <path>/tek/workspace/IRVING_Subtracing</path>
+    </workspace>
+    <workspace>
+      <name>10.0 JOLIET</name>
+      <path>/tek/workspace/JOLIET</path>
+    </workspace>
+    <workspace>
+      <name>10.5 NEWTON</name>
+      <path>/tek/workspace/NEWTON_Sy</path>
+    </workspace>
+  </workspaces>
+  <tasks>
+    <task id="task_check" name="CheckEnvironment" scriptType="python" fileName="/script/check.py">
+      <params>
+      </params>
+    </task>
+    <task id="task_buildWar" name="BuildWar" scriptType="python" fileName="/script/build.py">
+      <params>
+      </params>
+    </task>
+    <task id="task_deployWar" name="DeployWar" scriptType="python" fileName="/script/deploy.py">
+      <params>
+        <param key="ip" value="10.60.25.81"></param>
+        <param key="path" value="/opt/camiant/tomcat/webapps"></param>
+        <param key="username" value="root"></param>
+        <param key="password" value="NextGen"></param>
+        <param key="backupFolder" value="/var/camiant/war_backup"></param>
+      </params>
+    </task>
+    <task id="task_restartWebApp" name="RestartWebApp" scriptType="python" fileName="/script/restart.py">
+      <params>
+        <param key="ip" value="10.60.25.81"></param>
+        <param key="username" value="root"></param>
+        <param key="password" value="NextGen"></param>
+      </params>
+    </task>
+    <task id="task_checkIn" name="AccurevCheckIn" scriptType="python" fileName="/script/checkin.py">
+      <params>
+        <param key="username" value="rwang"></param>
+        <param key="password" value="rwang"></param>
+      </params>
+    </task>
+  </tasks>
+  <process>
+    <task-ref>task_check</task-ref>
+    <task-ref>task_buildWar</task-ref>
+    <task-ref>task_deployWar</task-ref>
+    <task-ref>task_restartWebApp</task-ref>
+    <task-ref>task_checkIn</task-ref>
+  </process>
+  <checkLink>http://10.60.25.81/infocenter/index.jsp</checkLink>
+</configuration>

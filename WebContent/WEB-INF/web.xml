@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>MyWeb</display-name>
+  <context-param>  
+    <param-name>dojoPath</param-name>  
+    <param-value>/js/dojo-release-1.8.0</param-value>  
+  </context-param>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:springConfig/applicationContext.xml</param-value>
+  </context-param>
+  
+
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <filter>
+    <filter-name>loginFilter</filter-name>
+    <filter-class>com.RFramework.common.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>loginFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>struts2</filter-name>
+    <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>struts2</filter-name>
+    <url-pattern>*.action</url-pattern>
+  </filter-mapping>
+
+  <!-- 
+  <servlet>
+    <servlet-name>uploader</servlet-name>
+    <servlet-class>infocenter.servlet.UploadServlet</servlet-class>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>action</servlet-name>
+    <servlet-class>infocenter.servlet.ActionServlet</servlet-class>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>query</servlet-name>
+    <servlet-class>infocenter.servlet.QueryServlet</servlet-class>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>uploader</servlet-name>
+    <url-pattern>*.u</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>action</servlet-name>
+    <url-pattern>*.a</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>query</servlet-name>
+    <url-pattern>*.q</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>pages/infocenter/infocenterMain.jsp</welcome-file>
+    <welcome-file>pages/Commons.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+   -->
+  <jsp-config>
+    <taglib>
+        <taglib-uri>/RFtaglib</taglib-uri>
+        <taglib-location>/WEB-INF/tlds/RFtaglib.tld</taglib-location>
+    </taglib>
+  </jsp-config>
+</web-app>
