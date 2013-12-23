@@ -8,24 +8,8 @@ import java.util.List;
 public class User {
 
   private List<Role> roleList;
+  private boolean isReset = true;
 
-  public List<Role> getRoleList() {
-    return roleList;
-  }
-
-  public void setRoleList(List<Role> roleList) {
-    if(null != roleList) {
-      if( null != this.roleList) {
-        for(Role r: roleList) {
-          this.addRole(r);
-        }
-      } else {
-        this.roleList = roleList;
-      }
-    }
-    
-  }
-  
   public void addRole(Role role) {
     if(null == roleList) {
       roleList = new ArrayList<Role>();
@@ -42,5 +26,28 @@ public class User {
       return AuthHelper.getMaxAuth(aList);
   }
 
+  public List<Role> getRoleList() {
+    return roleList;
+  }
 
+  public void setRoleList(List<Role> roleList) {
+    if(null != roleList) {
+      if( null != this.roleList) {
+        for(Role r: roleList) {
+          this.addRole(r);
+        }
+      } else {
+        this.roleList = roleList;
+      }
+    }
+
+  }
+
+  public boolean isReset() {
+    return isReset;
+  }
+
+  public void setReset(boolean isReset) {
+    this.isReset = isReset;
+  }
 }

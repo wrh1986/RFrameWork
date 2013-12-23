@@ -10,6 +10,6 @@ public interface Auth{
   Auth ROAUTH = new ReadAuth();
   Auth RWAUTH = new WriteAuth();
 
-    public boolean gt (Auth a);
-    public boolean lt (Auth a);
+  public boolean gt (Auth a);
+  public boolean lt (Auth a);
 }

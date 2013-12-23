@@ -14,7 +14,7 @@ public class PageItemServiceImpl implements PageItemService {
   private PageItemDao pageItemDao;
   
   @Override
-  public void add(PageItemBean item) {
+  public void insert(PageItemBean item) {
     // TODO Auto-generated method stub
     
   }
@@ -32,7 +32,7 @@ public class PageItemServiceImpl implements PageItemService {
   }
 
   @Override
-  public List<PageItemBean> queryForList(Map params) {
+  public List<PageItemBean> query(Map params) {
     // TODO Auto-generated method stub
     return this.pageItemDao.queryForList(params);
   }

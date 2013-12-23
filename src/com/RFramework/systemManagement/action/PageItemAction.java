@@ -39,7 +39,7 @@ public class PageItemAction extends ActionSupport{
   }
   
   public String getAllPages(){
-    items = this.pageItemService.formatTreeList(pageItemService.queryForList(new HashMap()));
+    items = this.pageItemService.formatTreeList(pageItemService.query(new HashMap()));
     return SUCCESS;
   }
 

@@ -9,6 +9,8 @@
     <constant name="struts.enable.DynamicMethodInvocation" value="false" />
     <constant name="struts.devMode" value="true" />
 
+    <include file="/com/RFramework/systemManagement/config/strutsConfig.xml"></include>
+
     <package name="default" namespace="/" extends="struts-default">
 
         <default-action-ref name="index" />
@@ -24,79 +26,25 @@
         <action name="main" class="successAction">
             <result name="success">/pages/main/main.jsp</result>
         </action>
-    
+
         <action name="MAIN" class="successAction">
             <result name="success" type="chain">main</result>
         </action>
-        
+
         <action name="login" class="successAction">
             <result name="success">/pages/main/login.jsp</result>
         </action>
-        
+
         <action name="authCheck" class="authCheckAction" method="check">
             <result name="success" type="chain">main</result>
             <result name="login" type="chain">login</result>
         </action>
-        
+
         <action name="loadMenuPage" class="successAction">
-          <result name="success" type="freemarker">
-            /templates/main/menu.ftl
-          </result>
+            <result name="success" type="freemarker">
+                /templates/main/menu.ftl
+            </result>
         </action>
-    </package>
-
-    <package name="systemManagement" namespace="/systemManagement" extends="struts-default">
-        <action name="pageFolderView" class="pageAction" method="execute">
-          <result name="success" type="freemarker">
-            /templates/systemManagement/pageFolderView.ftl
-          </result>
-        </action>
-        <action name="pageFolderModify" class="pageAction" method="execute">
-          <result name="success" type="freemarker">
-            /templates/systemManagement/pageFolderCreateModify.ftl
-          </result>
-        </action>
-        <action name="pageFolderModifySubmit" class="pageSubmitAction" method="save">
-          <result name="success" type="chain">pageFolderView</result>
-        </action>
-        <action name="pageLeafView" class="pageAction" method="execute">
-          <result name="success" type="freemarker">
-            /templates/systemManagement/pageLeafView.ftl
-          </result>
-        </action>
-        <action name="pageLeafModify" class="pageAction" method="execute">
-          <result name="success" type="freemarker">
-            /templates/systemManagement/pageLeafCreateModify.ftl
-          </result>
-        </action>
-        <action name="pageLeafModifySubmit" class="successAction">
-          <result name="success" type="freemarker">
-            /templates/systemManagement/pageLeafView.ftl
-          </result>
-          <result name="input" type="freemarker">
-            /templates/systemManagement/pageLeafCreateModify.ftl
-          </result>
-        </action>
-        
-        <!-- Add actions here -->
-    </package>
-
-    <package name="json" namespace="/json" extends="json-default">
-      <action name="getAllUsers" class="userAction" method="getAllUsers">
-        <result type="json">
-          <!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->
-          <param name="items">items</param>
-        </result>
-      </action>
-      <action name="getAllPages" class="pageAction" method="getAllPages">
-        <result type="json">
-          <!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->
-          <param name="excludeNullProperties">true</param>
-          <param name="includeProperties">
-            items.*,identifier,label
-          </param>
-        </result>
-      </action>
     </package>
 
     <!-- Add packages here -->

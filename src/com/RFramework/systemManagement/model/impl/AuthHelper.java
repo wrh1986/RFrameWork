@@ -19,6 +19,7 @@ public class AuthHelper {
         return result;
     }
 
+    @SuppressWarnings("unused")
     public static Auth getMinAuth(List<Auth> authList) {
         Auth result = Auth.NOAUTH;
         for (Auth a: authList) {

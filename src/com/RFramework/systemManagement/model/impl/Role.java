@@ -26,6 +26,11 @@ public class Role {
   }
   
   public Auth getAuth(long itemUid) {
+    for (Item item : itemList) {
+      if (item.getUid() == itemUid) {
+        return item.getAuth();
+      }
+    }
     return Auth.NOAUTH;
   }
 }

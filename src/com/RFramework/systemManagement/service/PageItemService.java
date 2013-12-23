@@ -7,10 +7,11 @@ import com.RFramework.pojo.PageItemBean;
 
 public interface PageItemService {
   
-  public void add(PageItemBean item);
+  public void insert(PageItemBean item);
   public void update(PageItemBean item);
   public void delete(PageItemBean item);
   public PageItemBean getPageItemById(long uid);
-  public List<PageItemBean> queryForList(Map params);
+
+  public List<PageItemBean> query(Map params);
   public List<PageItemBean> formatTreeList(List<PageItemBean> pageItemList);
 }

@@ -7,9 +7,9 @@ import com.RFramework.pojo.PageItemBean;
 
 public interface PageItemDao {
   
-  public void add(PageItemBean item);
+  public void insert(PageItemBean item);
   public void update(PageItemBean item);
-  public void delete(PageItemBean item);
+  public void delete(long uid);
   public PageItemBean getPageItemById(long uid);
   public List<PageItemBean> queryForList(Map params);
 }

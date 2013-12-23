@@ -13,7 +13,7 @@
     <property name="username" value="root" />
     <property name="password" value="root" />
   </bean> -->
-  <bean id="dataSource1"
+  <bean id="dataSource"
        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
     <property name="driverClassName">
       <value>com.mysql.jdbc.Driver</value>
@@ -28,11 +28,11 @@
       <value>root</value>
     </property>
   </bean>
-  <bean id="jdbcTemplate1" class="org.springframework.jdbc.core.JdbcTemplate">
-    <property name="dataSource" ref="dataSource1" />
+  <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+    <property name="dataSource" ref="dataSource" />
   </bean>
   
   <bean id="baseDao" class="com.RFramework.common.dao.BaseDao">
-    <property name="jdbcTemplate" ref="jdbcTemplate1" />
+    <property name="jdbcTemplate" ref="jdbcTemplate" />
   </bean>
 </beans>
