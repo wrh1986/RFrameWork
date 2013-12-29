@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
 import com.RFramework.common.app.AppConstants;
@@ -44,6 +45,8 @@ public class PageItemAction extends ActionSupport{
   }
 
   public String execute(){
+    Logger logger = Logger.getLogger(getClass());
+    logger.warn("Test Started******************************");
     HttpServletRequest request = ServletActionContext.getRequest();
     
     String idStr = request.getParameter(AppConstants.ID);

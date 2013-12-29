@@ -44,7 +44,7 @@
       </appender>
      -->
 
-    <root level="DEBUG">
+    <root level="WARN">
         <appender-ref ref="File"/>
         <appender-ref ref="Console"/>
         <!--

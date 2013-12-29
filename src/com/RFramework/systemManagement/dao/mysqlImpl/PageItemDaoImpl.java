@@ -28,13 +28,16 @@ public class PageItemDaoImpl extends BaseDao implements PageItemDao {
   public void update(PageItemBean item) {
     PageItemBean origBean = this.getPageItemById(item.getUid());
     StringBuilder sql = new StringBuilder("update sys_pageitem set ");
-    if(!origBean.getName().equals(item.getName())) {
-        sql.append(" name = '").append(item.getName()).append("', ");
+    sql.append(" name = '").append(item.getName()).append("' ");
+    
+    if(!origBean.getDescription().equals(item.getDescription())) {
+        sql.append(", description = '").append(item.getDescription()).append("' ");
     }
     if(!origBean.getUrl().equals(item.getUrl())) {
-        sql.append(" url = '").append(item.getUrl()).append("', ");
+        sql.append(", url = '").append(item.getUrl()).append("' ");
     }
-    super.jdbcTemplate.execute(sql.substring(0, sql.length() - 2));
+    sql.append(" where uid = ").append(item.getUid());
+    super.jdbcTemplate.execute(sql.toString());
   }
 
   @Override

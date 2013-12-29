@@ -6,7 +6,8 @@ import java.util.Map;
 import com.RFramework.pojo.PageItemBean;
 
 public interface PageItemService {
-  
+
+  public void save(PageItemBean item);
   public void insert(PageItemBean item);
   public void update(PageItemBean item);
   public void delete(PageItemBean item);

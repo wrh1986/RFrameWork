@@ -6,7 +6,7 @@
 
 <struts>
 
-    <package name="systemManagement" namespace="/systemManagement" extends="struts-default, json-default">
+    <package name="systemManagement" namespace="/systemManagement" extends="default">
         <action name="pageFolderView" class="pageAction" method="execute">
             <result name="success" type="freemarker">
                 /templates/systemManagement/pageFolderView.ftl

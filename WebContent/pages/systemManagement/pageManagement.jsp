@@ -22,7 +22,7 @@
 	     
          // Create test store, adding the getChildren() method required by ObjectStoreModel
          var datastore = new ItemFileWriteStore({
-           url: "json/getAllPages.action",
+           url: "systemManagement/getAllPages.action",
            clearOnClose: true
          });
          

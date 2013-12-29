@@ -8,27 +8,34 @@ import java.util.Map;
 import com.RFramework.pojo.PageItemBean;
 import com.RFramework.systemManagement.dao.PageItemDao;
 import com.RFramework.systemManagement.service.PageItemService;
+import com.RFramework.utils.db.UidHelper;
 
 public class PageItemServiceImpl implements PageItemService {
 
   private PageItemDao pageItemDao;
   
+  public void save(PageItemBean item) {
+    if(null == item.getUid()) {
+      this.insert(item);
+    } else {
+      this.update(item);
+    }
+  }
+  
   @Override
   public void insert(PageItemBean item) {
-    // TODO Auto-generated method stub
-    
+    item.setUid(UidHelper.get());
+    this.pageItemDao.insert(item);
   }
 
   @Override
   public void update(PageItemBean item) {
-    // TODO Auto-generated method stub
-    
+    this.pageItemDao.update(item);
   }
 
   @Override
   public void delete(PageItemBean item) {
-    // TODO Auto-generated method stub
-    
+    this.pageItemDao.delete(item.getUid());
   }
 
   @Override

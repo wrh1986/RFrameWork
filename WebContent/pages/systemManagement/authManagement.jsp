@@ -50,7 +50,7 @@ require(['dojo/_base/array', 'dojo/_base/lang', 'dojo/on', 'dojox/grid/DataGrid'
 		  ForestStoreModel, Tree, dom, Button, registry, CheckBoxTree){
 
     var data = new ItemFileWriteStore({  
-      url: "json/getAllUsers.action"
+      url: "systemManagement/getAllUsers.action"
     });
     
     var store = new ItemFileWriteStore(data);
@@ -75,7 +75,7 @@ require(['dojo/_base/array', 'dojo/_base/lang', 'dojo/on', 'dojox/grid/DataGrid'
     grid.startup();
     
     var datastore = new ItemFileWriteStore({
-      url: "json/getAllPages.action"
+      url: "systemManagement/getAllPages.action"
     });
     
     var treeModel = new ForestStoreModel({

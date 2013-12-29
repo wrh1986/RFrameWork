@@ -47,13 +47,13 @@ require(['dojo/_base/array', 'dojo/_base/lang', 'dojo/on', 'dojox/grid/DataGrid'
   function(array, lang, on, DataGrid, ItemFileWriteStore, dom, Button, registry, ready){
 
     var data = new ItemFileWriteStore({  
-      url: "json/getAllUsers.action"
+      url: "systemManagement/getAllUsers.action"
     });
     var data1 = new ItemFileWriteStore({  
-      url: "json/getAllUsers.action"
+      url: "systemManagement/getAllUsers.action"
     });
     var data2 = new ItemFileWriteStore({  
-      url: "json/getAllUsers.action"
+      url: "systemManagement/getAllUsers.action"
     });
     var store = new ItemFileWriteStore(data);
     var store1 = new ItemFileWriteStore(data1);

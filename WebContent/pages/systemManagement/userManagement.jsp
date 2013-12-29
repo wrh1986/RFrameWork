@@ -27,7 +27,7 @@
     function(array, lang, on, DataGrid, ItemFileWriteStore, dom, Button, registry, ready){
 
 		  var data = new ItemFileWriteStore({  
-			  url: "json/getAllUsers.action"
+			  url: "systemManagement/getAllUsers.action"
 			});
       var store = new ItemFileWriteStore(data);
       

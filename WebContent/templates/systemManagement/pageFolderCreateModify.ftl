@@ -32,7 +32,7 @@
         <#if pageItem??>
           <input name="description" type="text" value="${pageItem.description}">
         <#else>
-          <input name="description" type="text" value="">
+          <input name="description" type="text" value="11">
         </#if>
       </td>
     </tr>

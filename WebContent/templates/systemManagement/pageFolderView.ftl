@@ -44,7 +44,7 @@
   <tr>
     <td>描述</td>
     <td>
-      
+      ${pageItem.description}
     </td>
   </tr>
 </table>

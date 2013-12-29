@@ -11,8 +11,16 @@
 
     <include file="/com/RFramework/systemManagement/config/strutsConfig.xml"></include>
 
-    <package name="default" namespace="/" extends="struts-default">
-
+    
+    <package name="default" namespace="/" extends="struts-default, json-default">
+        <interceptors>
+          <interceptor-stack name="default">
+            <interceptor-ref name="defaultStack">
+              <param name="exception.logEnabled">true</param>  
+              <param name="exception.logLevel">error</param>  
+            </interceptor-ref>
+          </interceptor-stack>
+        </interceptors>
         <default-action-ref name="index" />
 
         <global-results>
@@ -20,7 +28,8 @@
         </global-results>
 
         <global-exception-mappings>
-            <exception-mapping exception="java.lang.Exception" result="error"/>
+            <exception-mapping exception="java.lang.Exception" result="error" />
+            <exception-mapping exception="java.lang.Throwable" result="error" />
         </global-exception-mappings>
 
         <action name="main" class="successAction">
