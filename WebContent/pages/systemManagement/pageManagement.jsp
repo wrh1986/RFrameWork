@@ -55,6 +55,36 @@
         	   this.set('selectedNodes',[]);
            },
            
+           add: function(/**item **/ addItem, /**parentId **/parentId) {
+        	   treeModel.fetchItemByIdentity({
+               identity: parentId,
+               onItem: function(item) {
+            	   treeModel.newItem(addItem, item);
+               }
+        	   });
+           },
+           
+           remove: function(/**itemId **/ itemId) {
+        	   var currentNode = this.selectedNode;
+        	   currentNode.setSelected(false);
+        	   var nextNode = tree._getNextNode(currentNode);
+        	   if(nextNode != null) {
+        		   this.selectLeaf(nextNode.item.uid);
+        	   } else {
+        		   // select parentNode
+        		   var parentNode = currentNode.getParent();
+        		   if(parentNode != null) {
+        			   this.selectLeaf(parentNode.item.uid);
+        		   }
+        	   }
+             currentNode.destroy();
+           },
+           
+           update: function(/**item **/updateItem) {
+        	   
+           },
+           
+             
            selectLeaf: function(/**item id**/id){
         	   treeModel.fetchItemByIdentity({
         		   identity: id,
