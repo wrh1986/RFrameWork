@@ -20,10 +20,11 @@ public class PageItemSubmitAction extends ActionSupport{
   private PageItemService pageItemService;
   
   public String save(){
-    pageItemService.save(getBean());
-    HttpServletRequest request = ServletActionContext.getRequest();
-    request.setAttribute(AppConstants.ID, this.uid);
-    request.setAttribute(AppConstants.ACTION, AppConstants.ACTION_MODIFY);
+    PageItemBean item = getBean();
+    pageItemService.save(item);
+    if(uid == null) {
+      this.uid = item.getUid();
+    }
     return SUCCESS;
   }
   
@@ -46,6 +47,8 @@ public class PageItemSubmitAction extends ActionSupport{
   private String description;
   //private String parentId;
   private String url;
+  private String result = "success";
+  private String resultType = "json";
   public Long getUid() {
     return uid;
   }
@@ -69,5 +72,21 @@ public class PageItemSubmitAction extends ActionSupport{
   }
   public void setPageItemService(PageItemService pageItemService) {
     this.pageItemService = pageItemService;
+  }
+
+  public String getResult() {
+    return result;
+  }
+
+  public void setResult(String result) {
+    this.result = result;
+  }
+
+  public String getResultType() {
+    return resultType;
+  }
+
+  public void setResultType(String resultType) {
+    this.resultType = resultType;
   }
 }

@@ -1,10 +1,10 @@
 <form id="systemManagement_pageFolderCreateModifyForm">
   <#if pageItem??>
     <input type="hidden" name="uid" value="${pageItem.uid}" />
-    <input type="hidden" name="type" value="${pageItem.type}" />
+    <input type="hidden" name="typeString" value="${pageItem.typeString}" />
   <#else>
     <input type="hidden" name="uid" value="" />
-    <input type="hidden" name="type" value="F" />
+    <input type="hidden" name="typeString" value="F" />
   </#if>
   <table>
     <colgroup>
@@ -32,7 +32,7 @@
         <#if pageItem??>
           <input name="description" type="text" value="${pageItem.description}">
         <#else>
-          <input name="description" type="text" value="11">
+          <input name="description" type="text" value="">
         </#if>
       </td>
     </tr>
@@ -40,14 +40,26 @@
 </form>
 <div data-dojo-type="dijit.form.Button">保存
   <script type="dojo/on" data-dojo-event="click">
-    require(["dojo/request/iframe"], function(iframe){
-      iframe("systemManagement/pageFolderModifySubmit.action",{
-        form: "systemManagement_pageFolderCreateModifyForm",
+    require(['dojo/request/xhr', 'dijit/registry', "dojo/dom-form"], function(xhr, registry, domForm){
+      var updateItem = domForm.toObject("systemManagement_pageFolderCreateModifyForm");
+      xhr("systemManagement/pageFolderModifySubmit.action",{
+        data: updateItem,
         method: "POST",
-        handleAs: "text"
+        handleAs: "json"
       }).then(
         function(data){
-          replaceData("pageManagement_main", data);
+          if(data.result && data.result == 'success') {
+            <#if pageItem??>
+              registry.byId("pageManagement_tree").selectLeaf(${pageItem.uid});
+              registry.byId("pageManagement_tree").updateNode(${pageItem.uid}, updateItem);
+            <#else>
+              if(data.uid) {
+                updateItem.uid = uid;
+              }
+              registry.byId("pageManagement_tree").selectLeaf(${parentId});
+              registry.byId("pageManagement_tree").addNode(updateItem, ${parentId});
+            </#if>
+          }
         },
         function(err){
           console.log(err);
@@ -59,7 +71,11 @@
 <div data-dojo-type="dijit.form.Button">取消
   <script type="dojo/on" data-dojo-event="click">
     require(['dijit/registry'], function(registry){
-      registry.byId("pageManagement_tree").selectLeaf(${pageItem.uid});
+      <#if pageItem??>
+        registry.byId("pageManagement_tree").selectLeaf(${pageItem.uid});
+      <#else>
+        registry.byId("pageManagement_tree").selectLeaf(${parentId});
+      </#if>
     })
   </script>
 </div>

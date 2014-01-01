@@ -14,7 +14,12 @@
       </script>
     </div>
     <div data-dojo-type="dijit.form.Button">删除
-      
+      <script type="dojo/on" data-dojo-event="click">
+        require(['dojo/request/xhr', 'dijit/registry'], function(xhr, registry){
+          
+          registry.byId("pageManagement_tree").removeNode();
+        })
+      </script>
     </div>
   </div>
 </div>

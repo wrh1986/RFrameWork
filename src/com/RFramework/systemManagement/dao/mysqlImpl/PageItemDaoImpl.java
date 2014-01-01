@@ -72,7 +72,7 @@ public class PageItemDaoImpl extends BaseDao implements PageItemDao {
       item.setUid(rs.getLong("uid"));
       item.setName(rs.getString("name"));
       item.setUrl(rs.getString("url"));
-      item.setType(com.RFramework.systemManagement.model.PageItemType.parseType(rs.getInt("type")));
+      item.setType(rs.getInt("type"));
       item.setParentId(rs.getLong("parentId"));
       item.setSequence(rs.getInt("sequence"));
       item.setDescription(rs.getString("description"));

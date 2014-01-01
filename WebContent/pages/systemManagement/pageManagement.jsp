@@ -28,7 +28,7 @@
          
          var treeModel = new ForestStoreModel({
              store: datastore,
-             query: {type: "F"},
+             query: {typeString: "F"},
              rootId: "root",
              rootLabel: "根目录",
              childrenAttrs: ["children"]
@@ -41,10 +41,10 @@
              if(item.root) {
                console.log(this.model.root);
              }
-             else if(item.type == 'F') {
+             else if(item.typeString == 'F') {
                var url = "systemManagement/pageFolderView.action?pageAction=view&id="+item.uid;
                loadUrlData("pageManagement_main", url);
-             } else if(item.type == 'L') {
+             } else if(item.typeString == 'L') {
                var url = "systemManagement/pageLeafView.action?pageAction=view&id="+item.uid;
                loadUrlData("pageManagement_main", url);
              }
@@ -55,7 +55,7 @@
         	   this.set('selectedNodes',[]);
            },
            
-           add: function(/**item **/ addItem, /**parentId **/parentId) {
+           addNode: function(/**item **/ addItem, /**parentId **/parentId) {
         	   treeModel.fetchItemByIdentity({
                identity: parentId,
                onItem: function(item) {
@@ -64,7 +64,7 @@
         	   });
            },
            
-           remove: function(/**itemId **/ itemId) {
+           removeNode: function(/**itemId **/ itemId) {
         	   var currentNode = this.selectedNode;
         	   currentNode.setSelected(false);
         	   var nextNode = tree._getNextNode(currentNode);
@@ -77,13 +77,22 @@
         			   this.selectLeaf(parentNode.item.uid);
         		   }
         	   }
-             currentNode.destroy();
+        	   datastore.deleteItem(currentNode.item);
+        	   //currentNode.destroy();
            },
            
-           update: function(/**item **/updateItem) {
-        	   
+           updateNode: function(/**id **/id, /**item **/updateItem) {
+        	   datastore.fetchItemByIdentity({
+               identity: id,
+               onItem: function(item) {
+            	   for(var p in updateItem) {
+            		   if(p != 'uid'){
+            			   datastore.setValue(item, p, updateItem[p]);
+            		   }
+            	   }
+               }
+        	   });
            },
-           
              
            selectLeaf: function(/**item id**/id){
         	   treeModel.fetchItemByIdentity({
@@ -95,10 +104,10 @@
    	             if(item.root) {
    	               console.log(tree.model.root);
    	             }
-   	             else if(item.type == 'F') {
+   	             else if(item.typeString == 'F') {
    	               var url = "systemManagement/pageFolderView.action?pageAction=view&id="+item.uid;
    	               loadUrlData("pageManagement_main", url);
-   	             } else if(item.type == 'L') {
+   	             } else if(item.typeString == 'L') {
    	               var url = "systemManagement/pageLeafView.action?pageAction=view&id="+item.uid;
    	               loadUrlData("pageManagement_main", url);
    	             }

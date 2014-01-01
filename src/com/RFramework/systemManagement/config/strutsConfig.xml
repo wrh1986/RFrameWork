@@ -18,7 +18,13 @@
             </result>
         </action>
         <action name="pageFolderModifySubmit" class="pageSubmitAction" method="save">
-            <result name="success" type="chain">pageFolderView</result>
+            <result type="json">
+                <!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->
+                <param name="excludeNullProperties">true</param>
+                <param name="includeProperties">
+                    result
+                </param>
+            </result>
         </action>
         <action name="pageLeafView" class="pageAction" method="execute">
             <result name="success" type="freemarker">

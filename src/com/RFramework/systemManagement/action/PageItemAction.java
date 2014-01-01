@@ -23,6 +23,7 @@ public class PageItemAction extends ActionSupport{
   private PageItemService pageItemService;
   private List<PageItemBean> items;
   private String identifier = "uid";
+  private long parentId;
   private String label = "name";
   private PageItemBean pageItem;
   private String lastSelected="root";
@@ -50,10 +51,12 @@ public class PageItemAction extends ActionSupport{
     HttpServletRequest request = ServletActionContext.getRequest();
     
     String idStr = request.getParameter(AppConstants.ID);
-    if(idStr == null)
-    {
+    if(idStr == null) {
       idStr = (String) request.getAttribute(AppConstants.ID);
     }
+    
+    String parentIdStr = request.getParameter(AppConstants.PARENT_ID);
+    
     if(null != request.getAttribute(AppConstants.ACTION)){
       this.setPageAction((String) request.getAttribute(AppConstants.ACTION));
     }
@@ -65,7 +68,7 @@ public class PageItemAction extends ActionSupport{
     } else if("modify".equals(this.pageAction)) {
       this.pageItem = this.pageItemService.getPageItemById(uid);
     } else if("create".equals(this.pageAction)) {
-      
+      setParentId(null!=parentIdStr?Long.valueOf(parentIdStr):0l);
     } else if("delete".equals(this.pageAction)) {
       this.pageItem = this.pageItemService.getPageItemById(uid);
       if(null != this.pageItem){
@@ -101,5 +104,13 @@ public class PageItemAction extends ActionSupport{
 
   public void setLastSelected(String lastSelected) {
     this.lastSelected = lastSelected;
+  }
+
+  public long getParentId() {
+    return parentId;
+  }
+
+  public void setParentId(long parentId) {
+    this.parentId = parentId;
   }
 }

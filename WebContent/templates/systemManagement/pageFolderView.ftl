@@ -6,7 +6,7 @@
     <div data-dojo-type="dijit.form.Button">新增页面
       <script type="dojo/on" data-dojo-event="click">
         require(['dojo/request/xhr'], function(xhr){
-          url = "systemManagement/pageFolderModify.action?pageAction=create";
+          url = "systemManagement/pageFolderModify.action?pageAction=create&parentId="+${pageItem.uid};
           loadUrlData("pageManagement_main", url);
         })
       </script>
@@ -21,9 +21,9 @@
     </div>
     <div data-dojo-type="dijit.form.Button">删除
       <script type="dojo/on" data-dojo-event="click">
-        require(['dojo/request/xhr'], function(xhr){
+        require(['dojo/request/xhr', 'dijit/registry'], function(xhr, registry){
           url = "systemManagement/pageFolderDelete.action?pageAction=delete&id="+${pageItem.uid};
-          loadUrlData("pageManagement_main", url);
+          registry.byId("pageManagement_tree").removeNode();
         })
       </script>
     </div>

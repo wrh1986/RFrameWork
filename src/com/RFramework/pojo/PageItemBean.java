@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.RFramework.systemManagement.model.PageItemType;
+import com.RFramework.utils.common.TreeHelper;
 
 public class PageItemBean implements Serializable{
 
@@ -13,7 +14,8 @@ public class PageItemBean implements Serializable{
   private static final long serialVersionUID = -579671848896044323L;
   private Long uid;
   private String name;
-  private PageItemType type;
+  private int type;
+  private String typeString;
   private Long parentId;
   private String url;
   private int sequence;
@@ -29,12 +31,6 @@ public class PageItemBean implements Serializable{
   }
   public void setName(String name) {
     this.name = name;
-  }
-  public PageItemType getType() {
-    return type;
-  }
-  public void setType(PageItemType pageItemType) {
-    this.type = pageItemType;
   }
   public Long getParentId() {
     return parentId;
@@ -68,6 +64,21 @@ public class PageItemBean implements Serializable{
   }
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  public int getType() {
+    return type;
+  }
+  public void setType(int pageItemType) {
+    this.type = pageItemType;
+    this.typeString = TreeHelper.parseNodeType(pageItemType);
+  }
+  public String getTypeString() {
+    return typeString;
+  }
+  public void setTypeString(String typeString) {
+    this.typeString = typeString;
+    this.type = TreeHelper.parseNodeType(typeString);
   }
 
   private List<PageItemBean> children;
