@@ -86,26 +86,48 @@
    	    container.selectChild(newPage);
    	  };
    	   
-   	  loadUrlData = function(destDivString, url) {
-   		  xhr(url).then(
-   	      function(data){
-   	    	  domConst.empty(destDivString);
-   	        //domConst.place(data, "pageManagement_main");
-   	        var content = {
-   	          content: data,
-   	          executeScripts:true
-   	        };
-   	        newPage = new ContentPane(content);
-   	        newPage.placeAt(destDivString);
-   	      },
-          function(err){
-            console.log(err);
-          }
-   	    );
+   	  loadUrlData = function(destDivString, url, args) {
+        if(args == null) {
+            xhr(url).then(
+                function(data){
+                    domConst.empty(destDivString);
+                    //domConst.place(data, "pageManagement_main");
+                    var content = {
+                        content: data,
+                        executeScripts:true
+                    };
+                    newPage = new ContentPane(content);
+                    newPage.placeAt(destDivString);
+                },
+                function(err){
+                    console.log(err);
+                }
+            );
+        } else {
+            xhr(url, {
+                data: args,
+                method: "POST"
+            }).then(
+                    function(data){
+                        domConst.empty(destDivString);
+                        //domConst.place(data, "pageManagement_main");
+                        var content = {
+                            content: data,
+                            executeScripts:true
+                        };
+                        newPage = new ContentPane(content);
+                        newPage.placeAt(destDivString);
+                    },
+                    function(err){
+                        console.log(err);
+                    }
+            );
+        }
+
       };
       
       replaceData = function(destDivString, data) {
-    	  domConst.empty(destDivString);
+        domConst.empty(destDivString);
         //domConst.place(data, "pageManagement_main");
         var content = {
           content: data,
