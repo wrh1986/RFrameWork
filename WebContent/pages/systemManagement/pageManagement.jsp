@@ -68,13 +68,22 @@
         	   var currentNode = this.selectedNode;
         	   currentNode.setSelected(false);
         	   var nextNode = tree._getNextNode(currentNode);
+               console.log(nextNode);
         	   if(nextNode != null) {
         		   this.selectLeaf(nextNode.item.uid);
         	   } else {
         		   // select parentNode
         		   var parentNode = currentNode.getParent();
         		   if(parentNode != null) {
-        			   this.selectLeaf(parentNode.item.uid);
+                       if(parentNode.item.uid) {
+                           this.selectLeaf(parentNode.item.uid);
+                       } else if (parentNode.item.id){
+                           this.selectLeaf(parentNode.item.id);
+                       } else {
+                           this.selectLeaf("root");
+                       }
+
+
         		   }
         	   }
         	   datastore.deleteItem(currentNode.item);
