@@ -39,7 +39,7 @@
     <col width="*"/>
   </colgroup>
   <tr>
-    <td>目录名称</td>
+    <td>目录名称12</td>
     <td>
       ${pageItem.name}
     </td>
